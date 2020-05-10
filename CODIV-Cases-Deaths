@@ -1,0 +1,13 @@
+import requests #To Call API of WorldoMeter
+import re #Regex Pattern Matching
+from lxml.html import fromstring #HTML Parsing
+a = input() #User Input
+r = requests.get('https://www.worldometers.info/coronavirus/country/'+ a)
+t = fromstring(r.content) # HTML Content Parsing
+z = t.findtext('.//title') # Parse Title
+k = re.findall(r'\b\s+.+Cases', z) # Number of Cases
+print(k) #Print Number of Cases
+d = re.findall(r'\b\s+\d+.+\s+Deaths', z) #Number of Deaths
+print(d)#Print Number of Deaths
+
+#API Source: ttps://www.worldometers.info
